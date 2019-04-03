@@ -50,7 +50,7 @@ void QueryPipeline::init(Processors sources)
 
         auto & header = source->getOutputs().front().getHeader();
 
-        if (header)
+        if (current_header)
             assertBlocksHaveEqualStructure(current_header, header, "QueryPipeline");
         else
             current_header = header;
