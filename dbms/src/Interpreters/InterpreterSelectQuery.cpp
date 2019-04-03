@@ -1641,7 +1641,7 @@ void InterpreterSelectQuery::executeTotalsAndHaving(QueryPipeline & pipeline, bo
 
     auto totals_having = std::make_shared<TotalsHavingTransform>(
             pipeline.getHeader(), overflow_row, expression,
-            has_having ? query.having_expression->getColumnName() : "",
+            has_having ? getSelectQuery().having_expression->getColumnName() : "",
             settings.totals_mode, settings.totals_auto_threshold, final);
 
     pipeline.addTotalsHavingTransform(std::move(totals_having));
