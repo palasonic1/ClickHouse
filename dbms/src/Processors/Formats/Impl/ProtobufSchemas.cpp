@@ -5,6 +5,7 @@
 #include <Formats/ProtobufSchemas.h>
 #include <google/protobuf/compiler/importer.h>
 #include <Common/Exception.h>
+#include <Core/ColumnWithTypeAndName.h>
 
 
 namespace DB
@@ -72,11 +73,6 @@ const google::protobuf::Descriptor * ProtobufSchemas::getMessageTypeForFormatSch
         it = importers.emplace(info.schemaDirectory(), std::make_unique<ImporterWithSourceTree>(info.schemaDirectory())).first;
     auto * importer = it->second.get();
     return importer->import(info.schemaPath(), info.messageName());
-}
-
-const google::protobuf::Descriptor * ProtobufSchemas::getMessageTypeForColumns(const std::vector<ColumnWithTypeAndName> & /*columns*/)
-{
-    throw Exception("Using the 'Protobuf' format without schema is not implemented", ErrorCodes::NOT_IMPLEMENTED);
 }
 
 }
