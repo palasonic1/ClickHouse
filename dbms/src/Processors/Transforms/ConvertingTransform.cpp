@@ -52,7 +52,7 @@ ConvertingTransform::ConvertingTransform(
 
     for (size_t result_col_num = 0; result_col_num < num_result_columns; ++result_col_num)
     {
-        const auto & res_elem = result_header.getByPosition(result_col_num);
+        const auto & res_elem = result.getByPosition(result_col_num);
 
         switch (mode)
         {
