@@ -13,6 +13,8 @@ public:
     LazyOutputFormat(Block header, WriteBuffer & out)
         : IOutputFormat(std::move(header), out), queue(1), finished(false) {}
 
+    String getName() const override { return "LazyOutputFormat"; }
+
     Block getBlock(UInt64 milliseconds = 0);
     Block getTotals();
     Block getExtremes();
