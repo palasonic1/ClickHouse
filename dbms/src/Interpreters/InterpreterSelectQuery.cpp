@@ -1614,7 +1614,7 @@ void InterpreterSelectQuery::executeHaving(QueryPipeline & pipeline, const Expre
 {
     pipeline.addSimpleTransform([&](const Block & header)
     {
-        return std::make_shared<FilterTransform>(header, expression, getSelectQuery().having_expression->getColumnName());
+        return std::make_shared<FilterTransform>(header, expression, getSelectQuery().having_expression->getColumnName(), false);
     });
 }
 
@@ -1702,12 +1702,14 @@ void InterpreterSelectQuery::executeRollupOrCube(QueryPipeline & pipeline, Modif
                               settings.max_bytes_before_external_group_by, settings.empty_result_for_aggregation_by_empty_set,
                               context.getTemporaryPath(), settings.max_threads);
 
+    auto transform_params = std::make_shared<AggregatingTransformParams>(params, final);
+
     pipeline.addSimpleTransform([&](const Block & header) -> ProcessorPtr
     {
         if (modificator == Modificator::ROLLUP)
-            return std::make_shared<RollupTransform>(header, params);
+            return std::make_shared<RollupTransform>(header, std::move(transform_params));
         else
-            return std::make_shared<CubeTransform>(header, params);
+            return std::make_shared<CubeTransform>(header, std::move(transform_params));
     });
 }
 
