@@ -262,7 +262,7 @@ void QueryPipeline::setOutput(ProcessorPtr output)
 {
     checkInitialized();
 
-    auto * format = typeid_cast<IOutputFormat * >(output.get());
+    auto * format = dynamic_cast<IOutputFormat * >(output.get());
 
     if (!format)
         throw Exception("IOutputFormat processor expected for QueryPipeline::setOutput.", ErrorCodes::LOGICAL_ERROR);
