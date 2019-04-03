@@ -37,11 +37,11 @@ static Block transformHeader(
 
 FilterTransform::FilterTransform(
     const Block & header,
-    ExpressionActionsPtr expression,
+    ExpressionActionsPtr expression_,
     String filter_column_name_,
     bool remove_filter_column)
-    : ISimpleTransform(header, transformHeader(header, expression, filter_column_name_, remove_filter_column), true)
-    , expression(std::move(expression))
+    : ISimpleTransform(header, transformHeader(header, expression_, filter_column_name_, remove_filter_column), true)
+    , expression(std::move(expression_))
     , filter_column_name(std::move(filter_column_name_))
     , remove_filter_column(remove_filter_column)
 {
