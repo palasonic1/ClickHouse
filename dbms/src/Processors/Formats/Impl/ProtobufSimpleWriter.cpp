@@ -1,5 +1,5 @@
 #include <cassert>
-#include <Formats/ProtobufSimpleWriter.h>
+#include <Processors/Formats/Impl/ProtobufSimpleWriter.h>
 #include <IO/WriteHelpers.h>
 
 namespace DB

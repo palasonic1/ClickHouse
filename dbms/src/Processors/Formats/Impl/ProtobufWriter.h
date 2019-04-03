@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Core/UUID.h>
-#include <Formats/ProtobufSimpleWriter.h>
+#include <Processors/Formats/Impl/ProtobufSimpleWriter.h>
 #include <boost/noncopyable.hpp>
 #include <Common/PODArray.h>
 #include <Common/UInt128.h>
