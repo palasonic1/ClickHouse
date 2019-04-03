@@ -18,6 +18,8 @@ public:
     FilterTransform(
         const Block & header, ExpressionActionsPtr expression, String filter_column_name, bool remove_filter_column);
 
+    String getName() const override { return "FilterTransform"; }
+
     Status prepare() override;
 
 protected:

@@ -18,6 +18,7 @@ public:
         const SubqueriesForSets & subqueries_for_sets_,
         const SizeLimits & network_transfer_limits);
 
+    String getName() const override { return "CreatingSetsTransform"; }
     Status prepare() override;
     void work() override;
 
