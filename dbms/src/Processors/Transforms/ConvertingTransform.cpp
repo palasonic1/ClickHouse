@@ -39,6 +39,7 @@ ConvertingTransform::ConvertingTransform(
     const Context & context)
     : ISimpleTransform(std::move(source_header), std::move(result_header), false)
     , context(context)
+    , conversion(result_header.columns())
 {
     auto & source = getInputPort().getHeader();
     auto & result = getOutputPort().getHeader();
