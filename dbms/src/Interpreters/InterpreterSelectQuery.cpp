@@ -2140,7 +2140,8 @@ void InterpreterSelectQuery::executeSubqueriesInSetsAndJoins(QueryPipeline & pip
 
     auto creating_sets = std::make_shared<CreatingSetsTransform>(
             pipeline.getHeader(), subqueries_for_sets,
-            SizeLimits(settings.max_rows_to_transfer, settings.max_bytes_to_transfer, settings.transfer_overflow_mode));
+            SizeLimits(settings.max_rows_to_transfer, settings.max_bytes_to_transfer, settings.transfer_overflow_mode),
+            context);
 
     pipeline.addCreatingSetsTransform(std::move(creating_sets));
 }
