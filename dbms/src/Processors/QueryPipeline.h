@@ -48,7 +48,7 @@ public:
     void addTableLock(const TableStructureReadLockPtr & lock) { table_locks.push_back(lock); }
 
     /// For compatibility with IBlockInputStream.
-    void setProcessListEntry(std::shared_ptr<ProcessListEntry> entry) { process_list_entry = std::move(entry); }
+    void setProcessListEntry(ProcessList::EntryPtr entry) { process_list_entry = std::move(entry); }
     void setProgressCallback(const ProgressCallback & callback);
     void setProcessListElement(QueryStatus * elem);
 
@@ -81,7 +81,7 @@ private:
       *  since in and out contain pointer to objects inside process_list_entry (query-level MemoryTracker for example),
       *  which could be used before destroying of in and out.
       */
-    std::shared_ptr<ProcessListEntry> process_list_entry;
+    ProcessList::EntryPtr process_list_entry;
 
     void checkInitialized();
     void checkSource(const ProcessorPtr & source);
