@@ -1,6 +1,8 @@
 #pragma once
 #include <Processors/IProcessor.h>
-#include <Interpreters/ProcessList.h>
+#include <DataStreams/IBlockInputStream.h>
+#include <DataStreams/IBlockOutputStream.h>
+
 
 namespace DB
 {
