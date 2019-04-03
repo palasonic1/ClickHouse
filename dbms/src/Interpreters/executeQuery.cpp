@@ -246,10 +246,7 @@ static std::tuple<ASTPtr, BlockIO> executeQueryImpl(
         }
 
         /// Hold element of process list till end of query execution.
-        if (use_processors)
-            pipeline.setProcessListEntry(process_list_entry);
-        else
-            res.process_list_entry = process_list_entry;
+        res.process_list_entry = process_list_entry;
 
         IBlockInputStream::LocalLimits limits;
         limits.mode = IBlockInputStream::LIMITS_CURRENT;
