@@ -38,14 +38,14 @@ static Block transformHeader(
 FilterTransform::FilterTransform(
     const Block & header,
     ExpressionActionsPtr expression,
-    String filter_column_name,
+    String filter_column_name_,
     bool remove_filter_column)
-    : ISimpleTransform(header, transformHeader(header, expression, filter_column_name, remove_filter_column), true)
+    : ISimpleTransform(header, transformHeader(header, expression, filter_column_name_, remove_filter_column), true)
     , expression(std::move(expression))
-    , filter_column_name(std::move(filter_column_name))
+    , filter_column_name(std::move(filter_column_name_))
     , remove_filter_column(remove_filter_column)
 {
-    auto & transformed_header = getOutputPort().getHeader();
+    auto transformed_header = transformHeader(getInputPort().getHeader(), expression, filter_column_name, false);
     filter_column_position = transformed_header.getPositionByName(filter_column_name);
     auto & filter_column = transformed_header.getByPosition(filter_column_position);
     constant_filter_description = ConstantFilterDescription(*filter_column.column);
