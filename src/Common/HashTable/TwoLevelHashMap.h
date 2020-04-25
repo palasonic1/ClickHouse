@@ -11,15 +11,16 @@ template
     typename Hash = DefaultHash<Key>,
     typename Grower = TwoLevelHashTableGrower<>,
     typename Allocator = HashTableAllocator,
-    template <typename ...> typename ImplTable = HashMapTable
+    template <typename ...> typename ImplTable = HashMapTable,
+    size_t BitsForBucket = 8
 >
-class TwoLevelHashMapTable : public TwoLevelHashTable<Key, Cell, Hash, Grower, Allocator, ImplTable<Key, Cell, Hash, Grower, Allocator>>
+class TwoLevelHashMapTable : public TwoLevelHashTable<Key, Cell, Hash, Grower, Allocator, ImplTable<Key, Cell, Hash, Grower, Allocator>, BitsForBucket>
 {
 public:
     using Impl = ImplTable<Key, Cell, Hash, Grower, Allocator>;
     using LookupResult = typename Impl::LookupResult;
 
-    using TwoLevelHashTable<Key, Cell, Hash, Grower, Allocator, ImplTable<Key, Cell, Hash, Grower, Allocator>>::TwoLevelHashTable;
+    using TwoLevelHashTable<Key, Cell, Hash, Grower, Allocator, ImplTable<Key, Cell, Hash, Grower, Allocator>, BitsForBucket>::TwoLevelHashTable;
 
     template <typename Func>
     void ALWAYS_INLINE forEachMapped(Func && func)
@@ -49,9 +50,10 @@ template
     typename Hash = DefaultHash<Key>,
     typename Grower = TwoLevelHashTableGrower<>,
     typename Allocator = HashTableAllocator,
-    template <typename ...> typename ImplTable = HashMapTable
+    template <typename ...> typename ImplTable = HashMapTable,
+    size_t BitsForBucket = 8
 >
-using TwoLevelHashMap = TwoLevelHashMapTable<Key, HashMapCell<Key, Mapped, Hash>, Hash, Grower, Allocator, ImplTable>;
+using TwoLevelHashMap = TwoLevelHashMapTable<Key, HashMapCell<Key, Mapped, Hash>, Hash, Grower, Allocator, ImplTable, BitsForBucket>;
 
 
 template
